@@ -84,6 +84,37 @@ class MiniGridRewardNormalize(RewardNormalize):
         self.max_steps = env.env.max_steps
 
 
+class BoxPushEnvWrapper:
+    def __init__(self, scale=1, shift=0):
+        self.scale = scale
+        self.shift = shift
+        self.game = pyspiel.load_game("coop_box_pushing",
+                                      {"fully_observable":pyspiel.GameParameter(True),
+                                       "horizon":pyspiel.GameParameter(100)})
+        self.state = self.game.new_initial_state()
+
+    def step(self, id_num, player):
+        if player == 0:
+            self.state.apply_actions([id_num, 0])
+        else:
+            self.state.apply_actions([0, id_num])
+        # For a deterministic game
+        self.state.apply_action(0) # Success for player1 action
+        self.state.apply_action(0) # Success for player2 action
+        self.state.apply_action(2) # A constant order of actions applied (e.g. when both try to move to the same spot)
+
+        reward = self.state.rewards()[0]
+        done = self.state.is_terminal()
+        info = {}
+        return self.state, reward, done, info  # maybe need to send copy.copy(self.state)?
+
+    def reset(self):
+        return self.game.new_initial_state()
+
+    def reward(self, r):
+        return (r - self.shift) * self.scale
+
+
 class EnvRegistry():
     def __init__(self):
         self.envs_type_name = {
@@ -137,9 +168,9 @@ class EnvRegistry():
         elif env_type in ['tab', 'vcomp']:
             constructor = self.env_infos[env_name].constructor
         elif env_type == 'open_spiel':
-            constructor = pyspiel.load_game(env_name,
-                                            {"fully_observable": pyspiel.GameParameter(True),
-                                             "horizon": pyspiel.GameParameter(100)})
+            constructor = lambda: BoxPushEnvWrapper(
+                scale=self.env_infos[env_name].reward_scale,
+                shift=self.env_infos[env_name].reward_shift)
         else:
             assert False
 

@@ -36,8 +36,11 @@ class LiteralActionTransformation(Transform_Agent):
         self.is_subpolicy = False
         self.set_trainable(False)
 
-    def transform(self, state, env, transform_params=None):
-        next_state, reward, done, info = env.step(self.id_num)
+    def transform(self, state, env, player, transform_params=None):
+        if player == -1:
+            next_state, reward, done, info = env.step(self.id_num)
+        else:
+            next_state, reward, done, info = env.step(self.id_num, player)
         assert info == {}
         transform_node = LiteralTransformNode(
             id_num=self.id_num,

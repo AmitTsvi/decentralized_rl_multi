@@ -85,8 +85,10 @@ def step_agent(env, organism, state, step_info_builder, transform_params):
     transform_params = transform_params if organism_output.action.is_subpolicy else None
     transform_output = organism_output.action.transform(
         state=state,
-        env=env, 
-        transform_params=transform_params)
+        env=env,
+        player=organism_output.player,
+        transform_params=transform_params
+        )
 
     step_info = step_info_builder(
         state=state,

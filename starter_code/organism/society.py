@@ -148,7 +148,7 @@ class Society(nn.Module, Organism):
     def _select_action(self, winner, winner_subsociety):
         action = self.agents_by_id[winner].transformation
         if self.players == 1:
-            return [action, 0]
+            return [action, -1]
         player = self.subsocieties_by_id[winner_subsociety].transformation
         return [action, player]
 
