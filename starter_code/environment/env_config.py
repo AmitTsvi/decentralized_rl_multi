@@ -119,6 +119,18 @@ class BoxPushEnvWrapper:
     def seed(self, s):
         self.env_seed = s
 
+    def render(self, mode='human'):
+        if mode == 'rgb_array':
+            t = self.state.observation_tensor(0)
+            t = torch.tensor(t)
+            t = t.reshape(11, 8, 8)
+            rgb_frame = torch.zeros(3, 8, 8)
+            rgb_frame[0] = t[1]
+            rgb_frame[1] = t[2]
+            rgb_frame[2] = torch.sum(t[3:10], 0)
+            return rgb_frame
+
+
 
 class EnvRegistry():
     def __init__(self):
