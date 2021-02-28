@@ -147,9 +147,11 @@ class Society(nn.Module, Organism):
 
     def _select_action(self, winner, winner_subsociety):
         action = self.agents_by_id[winner].transformation
+        print(self.players)
         if self.players == 1:
             return [action, -1]
         player = self.subsocieties_by_id[winner_subsociety].transformation
+        print(player)
         return [action, player]
 
     def _get_learnable_active_agents(self):
@@ -174,8 +176,8 @@ class Society(nn.Module, Organism):
             bids, subsocieties_bids = self._run_auction(state, deterministic=deterministic)
         winner, winner_subsociety = self._choose_winner(bids, subsocieties_bids)
         action, player = self._select_action(winner, winner_subsociety)
-        print("winner="+str(winner)+"s_winnner="+str(winner_subsociety)+"player="+str(player))
-        print(bids)
+        # print("winner="+str(winner)+"s_winnner="+str(winner_subsociety)+"player="+str(player))
+        # print(bids)
         winner_sub_agents_bids = OrderedDict([v for v in bids.items() if player*self.subsociety_n_agents <= v[0] < (player+1)*self.subsociety_n_agents])
         print(winner_sub_agents_bids)
         return DecentralizedOutput(action=action, player=player, winner=winner, s_winner=winner_subsociety, bids=bids,
