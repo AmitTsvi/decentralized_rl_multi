@@ -605,7 +605,7 @@ class MinigridEnvManager(VisualEnvManager):
 class SpielEnvManager(VisualEnvManager):
     def __init__(self, env_name, env_registry, args):
         super(SpielEnvManager, self).__init__(env_name, env_registry, args)
-        self.state_dim = self.env.observation_space.shape[0]
+        self.state_dim = (11, 8, 8)
         self.is_disc_action = True
         self.action_dim = self.env.action_space.n if self.is_disc_action else self.env.action_space.shape[0]
         self.max_episode_length = self.env._max_episode_steps
