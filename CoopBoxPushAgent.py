@@ -123,5 +123,9 @@ def main(_):
 # self.action_dim = self.env.action_space.n if self.is_disc_action else self.env.action_space.shape[0]
 # self.max_episode_length = self.env._max_episode_steps
 
+# python launchers/decentralized.py --env-name coop_box_pushing --parallel_collect --subroot coop_box_pushing --players 2 --cpu --printf
+# source venv/bin/activate
+# export PYTHONPATH=$PWD
+
 if __name__ == "__main__":
     app.run(main)

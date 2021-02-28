@@ -68,6 +68,7 @@ class AuctionStepInfo(BasicStepInfo):
         self.player = self.organism_output.player
         self.winner = self.organism_output.winner
         self.s_winner = self.organism_output.s_winner
+        self.w_s_bids = self.organism_output.w_s_bids
 
     def set_reward(self, reward):
         # assume that this is a leaf
