@@ -631,7 +631,7 @@ def format_log_string(list_of_rows):
 
 def renderfn(env, scale):
     frame = env.render(mode='rgb_array')
-
+    print(type(frame))
     if frame is not None:
         h, w, c = frame.shape
         frame = cv2.resize(frame, dsize=(int(w*scale), int(h*scale)), interpolation=cv2.INTER_CUBIC)
