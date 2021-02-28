@@ -143,8 +143,6 @@ class Society(nn.Module, Organism):
             winner_subsociety = 0
             winner_player = 0
         print(bids)
-        print(winner_subsociety)
-        print(winner_player)
         subsociety_agents = [v for v in bids.items() if winner_player*self.subsociety_n_agents <= v[0] < (winner_player+1)*self.subsociety_n_agents]
         winner = max(subsociety_agents, key=itemgetter(1))[0]  # bidding only within the winning subsociety
         return winner, winner_subsociety
