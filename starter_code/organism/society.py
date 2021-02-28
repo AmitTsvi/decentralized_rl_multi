@@ -138,7 +138,7 @@ class Society(nn.Module, Organism):
     def _choose_winner(self, bids, subsocieties_bids):
         if self.players > 1:
             winner_subsociety = max(subsocieties_bids.items(), key=itemgetter(1))[0]
-            winner_player = self.subsocieties_by_id[winner_subsociety].transformation
+            winner_player = self.subsocieties_by_id[winner_subsociety].transformation.id_num
         else:
             winner_subsociety = 0
             winner_player = 0
@@ -150,7 +150,7 @@ class Society(nn.Module, Organism):
         action = self.agents_by_id[winner].transformation
         if self.players == 1:
             return [action, -1]
-        player = self.subsocieties_by_id[winner_subsociety].transformation
+        player = self.subsocieties_by_id[winner_subsociety].transformation.id_num
         return [action, player]
 
     def _get_learnable_active_agents(self):
