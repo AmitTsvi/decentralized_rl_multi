@@ -96,7 +96,7 @@ class BoxPushEnvWrapper:
         self._max_episode_steps = self.game.max_game_length()
         self.env_seed = 0
 
-    def step(self, id_num, player):
+    def step(self, id_num, player=-1):
         if player == 0:
             self.state.apply_actions([id_num, 0])
         else:
