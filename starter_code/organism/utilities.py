@@ -6,7 +6,6 @@ def get_second_highest_bid(bids, winner):
         second_highest_bid = 0
     else:
         second_highest_bid = -np.inf
-        print(bids)
         for index, b in bids.items():
             if b > second_highest_bid and index != winner:
                 second_highest_bid = b
