@@ -35,7 +35,7 @@ def preprocess_state_before_forward(state):
     elif isinstance(state, pyspiel.State):
         t = state.observation_tensor(0)
         t = torch.tensor(t)
-        t.reshape(11, 8, 8)
+        t = t.reshape(11, 8, 8)
         return t
     else:
         return state
