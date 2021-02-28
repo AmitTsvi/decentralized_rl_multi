@@ -36,6 +36,6 @@ def preprocess_state_before_forward(state):
         t = state.observation_tensor(0)
         t = torch.tensor(t)
         t = t.reshape(11, 8, 8)
-        return t
+        return t.detach().numpy()
     else:
         return state
