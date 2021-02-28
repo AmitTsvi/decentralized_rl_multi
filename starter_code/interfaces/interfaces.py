@@ -2,7 +2,7 @@
 from collections import namedtuple
 
 CentralizedOutput = namedtuple('CentralizedOutput', ('action', 'dist_params'))
-DecentralizedOutput = namedtuple('DecentralizedOutput', ('action', 'player', 'winner', 's_winner', 'bids', 's_bids'))
+DecentralizedOutput = namedtuple('DecentralizedOutput', ('action', 'player', 'winner', 's_winner', 'bids', 's_bids', 'w_s_bids'))
 
 SphericalMultivariateNormalParams = namedtuple('SphericalMultivariateNormalParams', ('mu', 'logstd'))
 BetaParams = namedtuple('BetaParams', ('alpha', 'beta'))

@@ -27,6 +27,8 @@ class DecentralizedSampler(Sampler):
             start_time = society_episode_data[t].start_time
             end_time = society_episode_data[t].end_time
 
+            w_subsociety_bids = society_episode_data[t].w_s_bids
+
             if t < len(society_episode_data)-1:
                 next_winner = society_episode_data[t+1].winner
                 next_s_winner = society_episode_data[t+1].s_winner
@@ -34,7 +36,9 @@ class DecentralizedSampler(Sampler):
                 next_s_bids = society_episode_data[t+1].s_bids
                 next_winner_bid = next_bids[next_winner]
                 next_s_winner_bid = next_s_bids[next_s_winner]
-                next_second_highest_bid = get_second_highest_bid(next_bids, next_winner)
+
+                next_w_subsociety_bids = society_episode_data[t+1].w_s_bids
+                next_second_highest_bid = get_second_highest_bid(next_w_subsociety_bids, next_winner)
                 next_second_highest_s_bid = get_second_highest_bid(next_s_bids, next_s_winner)
             else:
                 next_winner_bid = 0
@@ -42,16 +46,19 @@ class DecentralizedSampler(Sampler):
                 next_second_highest_bid = 0
                 next_second_highest_s_bid = 0
 
-
             utilities = self.organism.compute_utilities(
                 UtilityArgs(
-                            bids=bids,
+                            bids=w_subsociety_bids,
                             winner=winner,
                             next_winner_bid=next_winner_bid,
                             next_second_highest_bid=next_second_highest_bid,
                             reward=reward,
                             start_time=start_time,
                             end_time=end_time))
+
+            for v in bids.items():
+                if v[0] not in utilities:
+                    utilities[v[0]] = 0
 
             s_utilities = self.organism.compute_utilities(
                 UtilityArgs(
