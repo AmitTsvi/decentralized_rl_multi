@@ -120,7 +120,7 @@ class DecentralizedLauncher(BaseLauncher):
                         id_num=id_num,
                         transformation=transformation,
                         networks=agent_networks,  # these are cloned!
-                        replay_buffer = agent_replay_buffer,
+                        replay_buffer=agent_replay_buffer,
                         args=args).to(device)
                     agents.append(agent)
                     if j == 0:
@@ -139,7 +139,7 @@ class DecentralizedLauncher(BaseLauncher):
                     id_num=id_num,
                     transformation=transformation,
                     networks=subsociety_networks,  # these are cloned!
-                    replay_buffer = subsociety_replay_buffer,
+                    replay_buffer=subsociety_replay_buffer,
                     args=args).to(device)
                 subsocieties.append(subsociety)
                 if j == 0:
