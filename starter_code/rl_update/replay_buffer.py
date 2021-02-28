@@ -67,6 +67,7 @@ class PathMemory(object):
         assert self.remaining_length >= 0
 
     def add_path(self, path):
+        print(path)
         path = deque(path)
         n = len(path)
         if n > self._max_replay_buffer_size: assert False
@@ -101,7 +102,6 @@ class PathMemory(object):
             next_transformation_id: (eplen_i)       - torch.float32
         """
         path_lengths = [len(path) for path in self.paths]
-        print(self.paths[0])
         everything = StoredTransition(*zip(*[StoredTransition(*zip(*path)) for path in self.paths]))
         torch_concatenate = lambda list_of_lists: torch.from_numpy(np.concatenate([np.stack(lst) for lst in list_of_lists])).to(torch.float32).to(device)
         stacked_paths = StoredTransition(*map(torch_concatenate, everything))
