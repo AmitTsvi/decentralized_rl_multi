@@ -127,7 +127,7 @@ class DecentralizedLauncher(BaseLauncher):
                     if j == 0:
                         unique_agents.append(agent)
 
-        for i in range(args.num_players):
+        for i in range(args.players):
             # same networks
             subsociety_networks = networks()
             subsociety_replay_buffer = replay_buffer()
