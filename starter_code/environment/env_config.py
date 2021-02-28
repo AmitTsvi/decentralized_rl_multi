@@ -9,6 +9,7 @@ import pprint
 import torch
 import torch.nn.functional as F
 import pyspiel
+import numpy as np
 
 from mnist.mnist_env import mnist_loss_01, MentalRotation
 from starter_code.environment.envs import OneStateOneStepKActionEnv, OneHotChainK, Duality
@@ -128,7 +129,7 @@ class BoxPushEnvWrapper:
             rgb_frame[0] = t[1]
             rgb_frame[1] = t[2]
             rgb_frame[2] = torch.sum(t[3:10], 0)
-            return rgb_frame
+            return rgb_frame.detach()
 
 
 
