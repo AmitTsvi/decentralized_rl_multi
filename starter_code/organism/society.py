@@ -39,6 +39,7 @@ class Society(nn.Module, Organism):
         self.transformation_type = self.get_transformation_type(self.transformations)
 
         self.set_trainable(True)
+        print(args.players)
 
     def assign_transformations(self):
         transformations = OrderedDict()
@@ -147,11 +148,9 @@ class Society(nn.Module, Organism):
 
     def _select_action(self, winner, winner_subsociety):
         action = self.agents_by_id[winner].transformation
-        print(self.players)
         if self.players == 1:
             return [action, -1]
         player = self.subsocieties_by_id[winner_subsociety].transformation
-        print(player)
         return [action, player]
 
     def _get_learnable_active_agents(self):
