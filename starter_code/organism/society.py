@@ -218,7 +218,7 @@ class Society(nn.Module, Organism):
                     )
             for s_id in step.s_bids:
                 step = preprocess_state_before_store(step)
-                processed_path[s_id].append(
+                s_processed_path[s_id].append(
                     StoredTransition(
                         state=step.state,
                         action=np.array([step.s_bids[s_id]]),

@@ -67,7 +67,6 @@ class PathMemory(object):
         assert self.remaining_length >= 0
 
     def add_path(self, path):
-        print(path)
         path = deque(path)
         n = len(path)
         if n > self._max_replay_buffer_size: assert False
