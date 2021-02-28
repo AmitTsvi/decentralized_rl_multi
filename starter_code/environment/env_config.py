@@ -129,7 +129,7 @@ class BoxPushEnvWrapper:
             rgb_frame[0] = t[1]
             rgb_frame[1] = t[2]
             rgb_frame[2] = torch.sum(t[3:10], 0)
-            return rgb_frame.detach()
+            return rgb_frame.numpy()
 
 
 
