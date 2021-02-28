@@ -144,8 +144,8 @@ class Learner():
             frames.append(episode_data[-1].next_frame)
             for agent_id, agent_bids in bids.items():
                 agent_bids.append(0)
-            for s_id, s_bids in s_bids.items():
-                s_bids.append(0)
+            for s_id, sub_bids in s_bids.items():
+                sub_bids.append(0)
             env_manager.save_video(epoch, i, bids, s_bids, returns, frames)
 
             if is_hierarchical(episode_data):
