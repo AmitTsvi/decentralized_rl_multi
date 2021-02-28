@@ -92,6 +92,7 @@ class BoxPushEnvWrapper:
                                       {"fully_observable":pyspiel.GameParameter(True),
                                        "horizon":pyspiel.GameParameter(100)})
         self.state = self.game.new_initial_state()
+        self._max_episode_steps = self.game.max_game_length()
 
     def step(self, id_num, player):
         if player == 0:

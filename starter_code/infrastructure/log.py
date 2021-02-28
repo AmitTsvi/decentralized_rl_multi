@@ -607,7 +607,7 @@ class SpielEnvManager(VisualEnvManager):
         super(SpielEnvManager, self).__init__(env_name, env_registry, args)
         self.state_dim = (11, 8, 8)
         self.is_disc_action = True
-        self.action_dim = self.env.action_space.n if self.is_disc_action else self.env.action_space.shape[0]
+        self.action_dim = 1
         self.max_episode_length = self.env._max_episode_steps
 
 def log_string(ordered_dict):
