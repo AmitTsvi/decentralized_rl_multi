@@ -49,7 +49,7 @@ def experiment_config(args):
     return args
 
 def lifelong_config(args):
-    if hasattr(args, 'multi'):
+    if args.players > 1:
         args.parents = ['player1, player2']
     else:
         args.parents = ['root']
@@ -87,10 +87,6 @@ def society_config(args):
     args.redundancy = 2
     args.clone = True
     args.memoryless = True
-    if hasattr(args, 'multi'):
-        args.players = 2
-    else:
-        args.players = 1
     return args
 
 def build_expname(args):

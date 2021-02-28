@@ -178,7 +178,7 @@ class Society(nn.Module, Organism):
         # print("winner="+str(winner)+"s_winnner="+str(winner_subsociety)+"player="+str(player))
         # print(bids)
         winner_sub_agents_bids = OrderedDict([v for v in bids.items() if player*self.subsociety_n_agents <= v[0] < (player+1)*self.subsociety_n_agents])
-        print(winner_sub_agents_bids)
+        # print(winner_sub_agents_bids)
         return DecentralizedOutput(action=action, player=player, winner=winner, s_winner=winner_subsociety, bids=bids,
                                    s_bids=subsocieties_bids, w_s_bids=winner_sub_agents_bids)
 
