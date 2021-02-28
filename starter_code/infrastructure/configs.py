@@ -49,6 +49,7 @@ def experiment_config(args):
     return args
 
 def lifelong_config(args):
+    print(args)
     if args.players > 1:
         args.parents = ['player1, player2']
     else:
