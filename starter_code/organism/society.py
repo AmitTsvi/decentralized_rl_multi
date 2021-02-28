@@ -141,11 +141,7 @@ class Society(nn.Module, Organism):
         else:
             winner_subsociety = 0
             winner_player = 0
-        print(bids)
-        print(winner_player)
-        print(self.subsociety_n_agents)
         subsociety_agents = [v for v in bids.items() if winner_player*self.subsociety_n_agents <= v[0] < (winner_player+1)*self.subsociety_n_agents]
-        print(subsociety_agents)
         winner = max(subsociety_agents, key=itemgetter(1))[0]  # bidding only within the winning subsociety
         return winner, winner_subsociety
 
@@ -178,10 +174,7 @@ class Society(nn.Module, Organism):
             bids, subsocieties_bids = self._run_auction(state, deterministic=deterministic)
         winner, winner_subsociety = self._choose_winner(bids, subsocieties_bids)
         action, player = self._select_action(winner, winner_subsociety)
-        # print("winner="+str(winner)+"s_winnner="+str(winner_subsociety)+"player="+str(player))
-        # print(bids)
         winner_sub_agents_bids = OrderedDict([v for v in bids.items() if player*self.subsociety_n_agents <= v[0] < (player+1)*self.subsociety_n_agents])
-        # print(winner_sub_agents_bids)
         return DecentralizedOutput(action=action, player=player, winner=winner, s_winner=winner_subsociety, bids=bids,
                                    s_bids=subsocieties_bids, w_s_bids=winner_sub_agents_bids)
 

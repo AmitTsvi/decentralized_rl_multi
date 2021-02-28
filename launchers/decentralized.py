@@ -104,9 +104,6 @@ class DecentralizedLauncher(BaseLauncher):
         unique_agents = []
         subsocieties = []
         unique_subsocieties = []
-        print("len(args.parents)="+str(len(args.parents)))
-        print("num_primitives="+str(num_primitives))
-        print("redundancy="+str(redundancy))
         replay_buffer = lambda: PathMemory(
             max_replay_buffer_size=args.max_buffer_size*redundancy)
         for k in range(len(args.parents)):
@@ -187,7 +184,6 @@ class DecentralizedLauncher(BaseLauncher):
             state_dim=task_progression.state_dim,
             action_dim=task_progression.action_dim,
             args=args)
-        print("arg.clone="+str(args.clone))
         if args.clone:
             agents, unique_agents, subsocieties, unique_subsocieties = cls.create_cloned_agents(
                 agent_builder=agent_builder,
