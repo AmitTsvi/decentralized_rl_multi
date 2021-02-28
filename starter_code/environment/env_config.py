@@ -93,6 +93,7 @@ class BoxPushEnvWrapper:
                                        "horizon":pyspiel.GameParameter(100)})
         self.state = self.game.new_initial_state()
         self._max_episode_steps = self.game.max_game_length()
+        self.seed = 0
 
     def step(self, id_num, player):
         if player == 0:
@@ -114,6 +115,9 @@ class BoxPushEnvWrapper:
 
     def reward(self, r):
         return (r - self.shift) * self.scale
+
+    def seed(self, seed):
+        self.seed = seed
 
 
 class EnvRegistry():
