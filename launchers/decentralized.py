@@ -135,7 +135,7 @@ class DecentralizedLauncher(BaseLauncher):
 
             for j in range(redundancy):
                 # because winner % action_dim!
-                id_num = i + j*args.num_players
+                id_num = i + j*args.players
                 subsociety = agent_builder(
                     id_num=id_num,
                     transformation=transformation,
