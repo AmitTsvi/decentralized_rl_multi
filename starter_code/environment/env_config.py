@@ -4,7 +4,6 @@ import gym
 from gym.wrappers.time_limit import TimeLimit
 import gym_minigrid
 from gym_minigrid.wrappers import ImgObsWrapper
-import babyai
 import pprint
 import torch
 import torch.nn.functional as F
