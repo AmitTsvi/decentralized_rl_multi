@@ -124,12 +124,13 @@ class BoxPushEnvWrapper:
         if mode == 'rgb_array':
             t = self.state.observation_tensor(0)
             t = torch.tensor(t)
-            t = t.reshape(11, 8, 8)
-            rgb_frame = torch.zeros(8, 8, 3)
-            rgb_frame[:,:,0] = t[1]
-            rgb_frame[:,:,1] = t[2]
-            rgb_frame[:,:,2] = torch.sum(t[3:10], 0)
-            return rgb_frame.numpy()
+            t = t.reshape(11, 8, 8).detach().numpy()
+            norm_array = lambda a: (255*(a - np.min(a))/np.ptp(a)).astype('uint8')
+            rgb_frame = np.zeros((8, 8, 3,), dtype='uint8')
+            rgb_frame[:,:,0] = norm_array(t[1])
+            rgb_frame[:,:,1] = norm_array(t[2])
+            rgb_frame[:,:,2] = norm_array(np.sum(t[3:10], 0))
+            return rgb_frame
 
 
 
