@@ -98,13 +98,13 @@ class BoxPushEnvWrapper:
 
     def step(self, id_num, player=-1):
         if player == 0:
-            self.state.apply_actions([id_num, 0])
+            self.state.apply_actions([id_num, 3])
         else:
-            self.state.apply_actions([0, id_num])
+            self.state.apply_actions([3, id_num])
         # For a deterministic game
-        self.state.apply_action(0) # Success for player1 action
-        self.state.apply_action(0) # Success for player2 action
-        self.state.apply_action(2) # A constant order of actions applied (e.g. when both try to move to the same spot)
+        self.state.apply_action(0)  # Success for player1 action
+        self.state.apply_action(0)  # Success for player2 action
+        self.state.apply_action(2)  # A constant order of actions applied (e.g. when both try to move to the same spot)
 
         reward = self.state.rewards()[0]
         done = self.state.is_terminal()
