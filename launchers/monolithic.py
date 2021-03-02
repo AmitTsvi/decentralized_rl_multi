@@ -48,6 +48,7 @@ class BaseLauncher:
             device = torch.device('cuda', index=args.gpu_index) 
         else:
             device = torch.device('cpu')
+        print(device)
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
         return args, device
