@@ -6,6 +6,7 @@ import numpy as np
 
 class BoxPushCNN(nn.Module):
     def __init__(self, n, m, device):
+        print(device)
         super(BoxPushCNN, self).__init__()
         self.image_conv = nn.Sequential(
             nn.Conv2d(11, 16, (2, 2)),
