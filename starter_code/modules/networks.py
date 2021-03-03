@@ -15,7 +15,7 @@ class BoxPushCNN(nn.Module):
             nn.ReLU(),
             nn.Conv2d(32, 64, (2, 2)),
             nn.ReLU()
-        ).to_device()
+        )
         self.image_embedding_size = ((n-1)//2-2)*((m-1)//2-2)*64
 
     def forward(self, x):

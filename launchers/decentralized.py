@@ -73,8 +73,8 @@ class DecentralizedLauncher(BaseLauncher):
             policy = cls.policy_switch(task_progression.state_dim, args)
             valuefn = cls.value_switch(task_progression.state_dim, args)
             networks = lambda: dict(
-                        policy=policy(),
-                        valuefn=valuefn()
+                        policy=policy().to(device),
+                        valuefn=valuefn().to(device)
                         )
             agent_builder = BiddingPrimitive
         else:

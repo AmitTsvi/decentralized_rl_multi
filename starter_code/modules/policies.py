@@ -36,7 +36,7 @@ class DiscreteCNNPolicy(BaseDiscretePolicy):
             self.decoder = MLP(dims=[self.encoder.image_embedding_size, action_dim])
         elif self.state_dim == (11, 8, 8):
             self.encoder = BoxPushCNN(*state_dim[1:])
-            self.decoder = MLP(dims=[self.encoder.image_embedding_size, action_dim]).to_device()
+            self.decoder = MLP(dims=[self.encoder.image_embedding_size, action_dim])
         else:
             assert False
 
@@ -64,7 +64,7 @@ class BetaCNNPolicy(BaseBetaPolicy):
             self.encoder = MinigridCNN(*state_dim[:-1])
         elif self.state_dim == (11, 8, 8):
             self.encoder = BoxPushCNN(*state_dim[1:])
-        self.decoder = BetaSoftPlusParams(self.encoder.image_embedding_size, action_dim).to_device()
+        self.decoder = BetaSoftPlusParams(self.encoder.image_embedding_size, action_dim)
 
 class BetaMeanCNNPolicy(BaseBetaPolicy):
     def __init__(self, state_dim, action_dim):
@@ -79,7 +79,7 @@ class BetaMeanCNNPolicy(BaseBetaPolicy):
             self.encoder = MinigridCNN(*state_dim[:-1])
         elif self.state_dim == (11, 8, 8):
             self.encoder = BoxPushCNN(*state_dim[1:])
-        self.decoder = BetaMeanParams(self.encoder.image_embedding_size, action_dim).to_device()
+        self.decoder = BetaMeanParams(self.encoder.image_embedding_size, action_dim)
 
 class SimpleBetaSoftPlusPolicy(BaseBetaPolicy):
     def __init__(self, state_dim, hdim, action_dim):
