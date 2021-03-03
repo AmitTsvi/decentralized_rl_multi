@@ -33,7 +33,7 @@ class DecentralizedLauncher(BaseLauncher):
 
         policy = dict(
             beta = lambda: SimpleBetaMeanPolicy(state_dim, args.hdim, 1),
-            cbeta = lambda: BetaMeanCNNPolicy(state_dim, 1)
+            cbeta = lambda: BetaMeanCNNPolicy(state_dim, 1, args.device)
         )
         return policy[policy_name]
 

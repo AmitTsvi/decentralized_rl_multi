@@ -29,7 +29,7 @@ class BoxPushCNN(nn.Module):
         return x
 
 class MinigridCNN(nn.Module):
-    def __init__(self, n, m, device):
+    def __init__(self, n, m):
         super(MinigridCNN, self).__init__()
         self.image_conv = nn.Sequential(
             nn.Conv2d(3, 16, (2, 2)),
@@ -39,7 +39,7 @@ class MinigridCNN(nn.Module):
             nn.ReLU(),
             nn.Conv2d(32, 64, (2, 2)),
             nn.ReLU()
-        ).to(device)
+        )
         self.image_embedding_size = ((n-1)//2-2)*((m-1)//2-2)*64
 
     def forward(self, x):

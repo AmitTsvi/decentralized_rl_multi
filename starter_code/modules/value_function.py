@@ -22,8 +22,8 @@ class CNNValueFn(nn.Module):
             self.encoder = MNIST_CNN(1)
             self.decoder = lambda x: x
         elif self.state_dim == (7, 7, 3):
-            self.encoder = MinigridCNN(*state_dim[:-1], device)
-            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1).to(device)
+            self.encoder = MinigridCNN(*state_dim[:-1])
+            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1)
         elif self.state_dim == (11, 8, 8):
             self.encoder = BoxPushCNN(*state_dim[1:], device)
             self.decoder = nn.Linear(self.encoder.image_embedding_size, 1).to(device)
