@@ -16,7 +16,7 @@ class BoxPushCNN(nn.Module):
             nn.ReLU(),
             nn.Conv2d(32, 64, (2, 2)),
             nn.ReLU()
-        ).to(device)
+        )
         self.image_embedding_size = ((n-1)//2-2)*((m-1)//2-2)*64
 
     def forward(self, x):
@@ -25,6 +25,7 @@ class BoxPushCNN(nn.Module):
 
         # (bsize, H, W, C) --> (bsize, C, H, W)
         # x = x.transpose(-3, -1).transpose(-2, -1).contiguous()
+        x = x.contiguous()
         x = self.image_conv(x)
         x = x.reshape(x.shape[0], -1)
         return x
