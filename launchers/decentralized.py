@@ -24,7 +24,7 @@ def parse_args():
 class DecentralizedLauncher(BaseLauncher):
 
     @classmethod
-    def policy_switch(cls, state_dim, args, device):
+    def policy_switch(cls, state_dim, args):
         envtype = cls.env_registry.get_env_type(args.env_name[0])
         if envtype in ['mg', 'vcomp', 'open_spiel']:
             policy_name = 'cbeta'
@@ -33,7 +33,7 @@ class DecentralizedLauncher(BaseLauncher):
 
         policy = dict(
             beta = lambda: SimpleBetaMeanPolicy(state_dim, args.hdim, 1),
-            cbeta = lambda: BetaMeanCNNPolicy(state_dim, 1, device)
+            cbeta = lambda: BetaMeanCNNPolicy(state_dim, 1)
         )
         return policy[policy_name]
 
@@ -70,8 +70,8 @@ class DecentralizedLauncher(BaseLauncher):
             args.num_primitives = task_progression.action_dim
 
         if args.alg_name in ['ppo']:
-            policy = cls.policy_switch(task_progression.state_dim, args, device)
-            valuefn = cls.value_switch(task_progression.state_dim, args, device)
+            policy = cls.policy_switch(task_progression.state_dim, args)
+            valuefn = cls.value_switch(task_progression.state_dim, args)
             networks = lambda: dict(
                         policy=policy(),
                         valuefn=valuefn()

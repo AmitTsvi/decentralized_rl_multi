@@ -15,7 +15,7 @@ class SimpleValueFn(nn.Module):
         return state_values
 
 class CNNValueFn(nn.Module):
-    def __init__(self, state_dim, device):
+    def __init__(self, state_dim):
         super(CNNValueFn, self).__init__()
         self.state_dim = state_dim
         if self.state_dim == (1, 64, 64):
@@ -25,8 +25,8 @@ class CNNValueFn(nn.Module):
             self.encoder = MinigridCNN(*state_dim[:-1])
             self.decoder = nn.Linear(self.encoder.image_embedding_size, 1)
         elif self.state_dim == (11, 8, 8):
-            self.encoder = BoxPushCNN(*state_dim[1:], device)
-            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1).to(device)
+            self.encoder = BoxPushCNN(*state_dim[1:])
+            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1)
         else:
             assert False
 
