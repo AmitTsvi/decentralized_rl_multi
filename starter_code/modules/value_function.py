@@ -15,18 +15,18 @@ class SimpleValueFn(nn.Module):
         return state_values
 
 class CNNValueFn(nn.Module):
-    def __init__(self, state_dim):
+    def __init__(self, state_dim, device):
         super(CNNValueFn, self).__init__()
         self.state_dim = state_dim
         if self.state_dim == (1, 64, 64):
             self.encoder = MNIST_CNN(1)
             self.decoder = lambda x: x
         elif self.state_dim == (7, 7, 3):
-            self.encoder = MinigridCNN(*state_dim[:-1])
-            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1)
+            self.encoder = MinigridCNN(*state_dim[:-1], device)
+            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1).to(device)
         elif self.state_dim == (11, 8, 8):
-            self.encoder = BoxPushCNN(*state_dim[1:])
-            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1)
+            self.encoder = BoxPushCNN(*state_dim[1:], device)
+            self.decoder = nn.Linear(self.encoder.image_embedding_size, 1).to(device)
         else:
             assert False
 

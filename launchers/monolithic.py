@@ -101,7 +101,7 @@ class BaseLauncher:
             value_name = 'mlp'
         valuefn = dict(
             mlp = lambda: SimpleValueFn(state_dim, args.hdim),
-            cnn = lambda: CNNValueFn(state_dim),
+            cnn = lambda: CNNValueFn(state_dim, args.device),
         )
         return valuefn[value_name]
 

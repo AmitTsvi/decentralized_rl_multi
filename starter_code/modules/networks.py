@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import numpy as np
 
 class BoxPushCNN(nn.Module):
-    def __init__(self, n, m):
+    def __init__(self, n, m, device):
         super(BoxPushCNN, self).__init__()
         self.image_conv = nn.Sequential(
             nn.Conv2d(11, 16, (2, 2)),
@@ -15,7 +15,7 @@ class BoxPushCNN(nn.Module):
             nn.ReLU(),
             nn.Conv2d(32, 64, (2, 2)),
             nn.ReLU()
-        )
+        ).to(device)
         self.image_embedding_size = ((n-1)//2-2)*((m-1)//2-2)*64
 
     def forward(self, x):
@@ -29,7 +29,7 @@ class BoxPushCNN(nn.Module):
         return x
 
 class MinigridCNN(nn.Module):
-    def __init__(self, n, m):
+    def __init__(self, n, m, device):
         super(MinigridCNN, self).__init__()
         self.image_conv = nn.Sequential(
             nn.Conv2d(3, 16, (2, 2)),
@@ -39,7 +39,7 @@ class MinigridCNN(nn.Module):
             nn.ReLU(),
             nn.Conv2d(32, 64, (2, 2)),
             nn.ReLU()
-        )
+        ).to(device)
         self.image_embedding_size = ((n-1)//2-2)*((m-1)//2-2)*64
 
     def forward(self, x):
