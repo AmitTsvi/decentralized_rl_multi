@@ -170,7 +170,7 @@ class Society(nn.Module, Organism):
     def forward(self, state, deterministic):
         with torch.no_grad():
             if isinstance(state, np.ndarray):
-                state = from_np(state, 'cpu')
+                state = from_np(state, self.device)
             bids, subsocieties_bids = self._run_auction(state, deterministic=deterministic)
         winner, winner_subsociety = self._choose_winner(bids, subsocieties_bids)
         action, player = self._select_action(winner, winner_subsociety)
