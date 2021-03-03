@@ -73,8 +73,8 @@ class DecentralizedLauncher(BaseLauncher):
             policy = cls.policy_switch(task_progression.state_dim, args)
             valuefn = cls.value_switch(task_progression.state_dim, args)
             networks = lambda: dict(
-                        policy=policy().to(device),
-                        valuefn=valuefn().to(device)
+                        policy=policy(),
+                        valuefn=valuefn()
                         )
             agent_builder = BiddingPrimitive
         else:
@@ -110,6 +110,8 @@ class DecentralizedLauncher(BaseLauncher):
             for i in range(num_primitives):
                 # same networks
                 agent_networks = networks()
+                agent_networks['policy'].to(device)
+                agent_networks['valuefn'].to(device)
                 agent_replay_buffer = replay_buffer()
                 transformation = transformation_builder(i)
 
