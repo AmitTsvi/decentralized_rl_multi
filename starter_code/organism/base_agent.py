@@ -19,7 +19,7 @@ class BaseAgent(nn.Module):
         self.bundle_networks(networks)
 
     def bundle_networks(self, networks):
-        self.networks = networks
+        self.networks = networks.to_device()
 
     def initialize_optimizer(self, lrs):
         self.optimizers = {}
