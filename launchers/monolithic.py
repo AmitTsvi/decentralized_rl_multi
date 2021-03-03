@@ -93,7 +93,7 @@ class BaseLauncher:
         return policy
 
     @classmethod
-    def value_switch(cls, state_dim, args, device):
+    def value_switch(cls, state_dim, args):
         envtype = cls.env_registry.get_env_type(args.env_name[0])
         if envtype in ['mg', 'vcomp', 'open_spiel']:
             value_name = 'cnn'
@@ -101,7 +101,7 @@ class BaseLauncher:
             value_name = 'mlp'
         valuefn = dict(
             mlp = lambda: SimpleValueFn(state_dim, args.hdim),
-            cnn = lambda: CNNValueFn(state_dim, device),
+            cnn = lambda: CNNValueFn(state_dim),
         )
         return valuefn[value_name]
 
