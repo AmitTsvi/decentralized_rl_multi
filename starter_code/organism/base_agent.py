@@ -73,7 +73,7 @@ class BaseRLAgent(BaseAgent, Organism):
     def forward(self, state, deterministic):
         with torch.no_grad():
             if isinstance(state, np.ndarray):
-                state = from_np(state, self.args.device)
+                state = from_np(state, 'cpu')
             action, dist_params = self.policy.select_action(state, deterministic)
             return CentralizedOutput(action=LiteralActionTransformation(action), dist_params=dist_params)
 
@@ -134,7 +134,7 @@ class BaseHRLAgent(BaseRLAgent):
     def forward(self, state, deterministic):
         with torch.no_grad():
             if isinstance(state, np.ndarray):
-                state = from_np(state, self.args.device)
+                state = from_np(state, 'cpu')
             action, dist_params = self.policy.select_action(state, deterministic)
             if self.policy.discrete:
                 action = self.transformations[action]
