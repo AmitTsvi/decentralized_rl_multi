@@ -104,7 +104,7 @@ class CoopBoxPushingSerialState : public SimMoveState {
   void MoveForward(Player player);
   bool InBounds(std::pair<int, int> coord) const;
   bool SameAsPlayer(std::pair<int, int> coord, Player player) const;
-  void CoopBoxPushingSerialState::UpdateLock(Player player);
+  void UpdateLock(Player player);
 
   // Partial observation of the specific agent.
   ObservationType PartialObservation(Player player) const;
