@@ -162,9 +162,9 @@ CoopBoxPushingSerialState::CoopBoxPushingSerialState(std::shared_ptr<const Game>
       fully_observable_(fully_observable),
       reward_(0),
       action_status_(
-          {ActionStatusType::kUnresolved, ActionStatusType::kUnresolved})
+          {ActionStatusType::kUnresolved, ActionStatusType::kUnresolved}),
       lock_status_(
-          {False, False}){
+          {false, false}){
   field_.resize(kRows * kCols, '.');
 
   // Small boxes.
@@ -182,7 +182,7 @@ CoopBoxPushingSerialState::CoopBoxPushingSerialState(std::shared_ptr<const Game>
 
 std::string CoopBoxPushingSerialState::ActionToString(Player player,
                                                 Action action) const {
-  return ::open_spiel::coop_box_pushing::ActionToString(action);
+  return ::open_spiel::coop_box_pushing_serial::ActionToString(action);
 }
 
 void CoopBoxPushingSerialState::SetField(std::pair<int, int> coord, char v) {
@@ -262,20 +262,20 @@ void CoopBoxPushingSerialState::AddReward(double reward) {
 }
 
 void CoopBoxPushingSerialState::UpdateLock(Player player) {
-  next_coords = NextCoord(player_coords_[player], player_orient_[player]);
+  std::pair<int, int> next_coords = NextCoord(player_coords_[player], player_orient_[player]);
   ActionType move = moves_[player];
-  if (move == ActionType::kMoveForward && field(next_coords[0]) == 'B'){
-    lock_status_[player] = True;
+  if (move == ActionType::kMoveForward && field(next_coords) == 'B'){
+    lock_status_[player] = true;
   } else if (move != ActionType::kStay){
-    lock_status_[player] = False;
+    lock_status_[player] = false;
   }
 }
 
 void CoopBoxPushingSerialState::ResolveMoves() {
   // Set the reward to 0, as it will be changed as a result of resolving moves.
   reward_ = 0;
-  player0_try = moves_[0] == ActionType::kMoveForward && action_status_[0] == ActionStatusType::kSuccess;
-  player1_try = moves_[1] == ActionType::kMoveForward && action_status_[1] == ActionStatusType::kSuccess;
+  bool player0_try = moves_[0] == ActionType::kMoveForward && action_status_[0] == ActionStatusType::kSuccess;
+  bool player1_try = moves_[1] == ActionType::kMoveForward && action_status_[1] == ActionStatusType::kSuccess;
 
   // Check for successful move of the big box.
   if (player0_try || player1_try) {
@@ -299,8 +299,8 @@ void CoopBoxPushingSerialState::ResolveMoves() {
             SetField(player_coords_[1], '.');
             SetPlayer(next_coords[0], 0);
             SetPlayer(next_coords[1], 1);
-            lock_status_[0] = False;
-            lock_status_[1] = False;
+            lock_status_[0] = false;
+            lock_status_[1] = false;
 
           if (next_next_coords[0].first == 0 && next_coords[0].first != 0) {
             AddReward(kBigBoxReward);
