@@ -88,7 +88,7 @@ class BoxPushEnvWrapper:
     def __init__(self, scale=1, shift=0):
         self.scale = scale
         self.shift = shift
-        self.game = pyspiel.load_game("coop_box_pushing",
+        self.game = pyspiel.load_game("coop_box_pushing_serial",
                                       {"fully_observable":pyspiel.GameParameter(True),
                                        "horizon":pyspiel.GameParameter(100)})
         self.state = self.game.new_initial_state()
