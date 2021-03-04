@@ -7,8 +7,11 @@ from gym_minigrid.wrappers import ImgObsWrapper
 import pprint
 import torch
 import torch.nn.functional as F
-import pyspiel
 import numpy as np
+import sys
+sys.path.append('/open_spiel')
+import pyspiel
+
 
 from mnist.mnist_env import mnist_loss_01, MentalRotation
 from starter_code.environment.envs import OneStateOneStepKActionEnv, OneHotChainK, Duality
