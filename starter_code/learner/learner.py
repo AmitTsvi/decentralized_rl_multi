@@ -103,7 +103,7 @@ class Learner():
         if self.args.param_verbose:
             print('Before')
             self.organism.visualize_parameters(self.logger.printf)
-
+        self.organism.to(self.device)
         t0 = time.time()
         self.organism.update(self.rl_alg)
         self.logger.printf('Epoch {}: Time to Update: {}'.format(epoch, time.time()-t0))
