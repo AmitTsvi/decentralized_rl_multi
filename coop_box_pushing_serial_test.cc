@@ -34,5 +34,5 @@ void BasicCoopBoxPushingTests() {
 }  // namespace open_spiel
 
 int main(int argc, char **argv) {
-  open_spiel::coop_box_pushing::BasicCoopBoxPushingTests();
+  open_spiel::coop_box_pushing_serial::BasicCoopBoxPushingTests();
 }
