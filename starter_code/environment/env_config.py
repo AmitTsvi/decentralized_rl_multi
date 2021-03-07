@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 import sys
-sys.path.append('/open_spiel')
+sys.path.append('./open_spiel/build/python')
 import pyspiel
 
 
