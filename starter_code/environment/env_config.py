@@ -99,6 +99,8 @@ class BoxPushEnvWrapper:
         self.env_seed = 0
 
     def step(self, id_num, player=-1):
+        if self.state.is_terminal():
+            return self.state, 0, True, {}
         if player == 0:
             self.state.apply_actions([id_num, 3])
         else:
