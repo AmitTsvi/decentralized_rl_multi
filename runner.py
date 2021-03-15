@@ -233,7 +233,7 @@ def run_tworooms_transfer_task():
 
 
 def run_coop_box_pushing():
-    r = RunnerWithIDs(command='python launchers/decentralized.py', gpus=[])
+    r = RunnerWithIDs(command='python launchers/decentralized.py', gpus=[0])
     r.add_flag('env-name', ['coop_box_pushing'])
     r.add_flag('parallel_collect', [True])
     r.add_flag('subroot', ['coop_box_pushing'])
