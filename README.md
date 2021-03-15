@@ -25,12 +25,13 @@ git clone https://github.com/AmitTsvi/decentralized_rl_multi.git
 # Recommended: Install pip dependencies and run under virtualenv.
 sudo apt-get install virtualenv python3-virtualenv
 virtualenv -p python3 venv
-source venv/bin/activate
 
 # Set the PYTHONPATH: add the following lines to the end of venv/bin/activate
 export PYTHONPATH=$PYTHONPATH:~/arl
 export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel
 export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel/build/python
+
+source venv/bin/activate
 
 # Install dependencies:
 pip install -r ubuntu_requirements.txt
