@@ -42,6 +42,17 @@ cd open_spiel
 ./install.sh
 ./open_spiel/scripts/build_and_run_tests.sh
 
+# Update runner.py
+# In function run_coop_box_pushing() upadte all gpu ids
+
+# activate gpus
+export OMP_NUM_THREADS=1
+
+# update number of epochs
+# edit in starter_code\infrastructure\configs.py
+
+# Run game
+python launchers/decentralized.py --env-name coop_box_pushing --subroot coop_box_pushing --players 2 --printf
 ```
 
 For GPU, set OMP_NUM_THREADS to 1: `export OMP_NUM_THREADS=1`.
