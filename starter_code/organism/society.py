@@ -82,10 +82,13 @@ class Society(nn.Module, Organism):
         return s_state_dict
 
     def load_state_dict(self, society_state_dict, society_subs_state_dict):
+        agents_changed = []
         for agent, agent_state_dict in zip(self.agents, society_state_dict):
-            agent.load_state_dict(agent_state_dict)
+            agents_changed.append(agent.load_state_dict(agent_state_dict))
+        subsocieties_changed = []
         for s, s_state_dict in zip(self.subsocieties, society_subs_state_dict):
-            s.load_state_dict(s_state_dict)
+            subsocieties_changed.append(s.load_state_dict(s_state_dict))
+        return np.mean(agents_changed), np.mean(subsocieties_changed)
 
     def _set_inactive_agents(self, agent_ids):
         for agent in self.agents:

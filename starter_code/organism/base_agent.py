@@ -53,11 +53,16 @@ class BaseAgent(nn.Module):
 
     def load_state_dict(self, agent_state_dict, reset_optimizer=True):
         for name in self.networks:
+            old_parameters = self.networks[name].parameters()
             self.networks[name].load_state_dict(agent_state_dict[name])
+            changed = 0
+            for p1, p2 in zip(old_parameters, self.networks[name].parameters()):
+                changed += p1.data.ne(p2.data).sum()
         if not reset_optimizer:
             for name in self.optimizers:
                 self.optimizers[name].load_state_dict(
                     agent_state_dict['{}_optimizer'.format(name)])
+        return changed
 
 class BaseRLAgent(BaseAgent, Organism):
     def __init__(self, networks, replay_buffer, args):

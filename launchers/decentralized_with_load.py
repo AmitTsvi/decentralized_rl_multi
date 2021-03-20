@@ -12,7 +12,7 @@ from starter_code.learner.learners import TabularDecentralizedLearner, Decentral
 from starter_code.modules.policies import SimpleBetaMeanPolicy, BetaMeanCNNPolicy
 from starter_code.rl_update.replay_buffer import PathMemory
 from starter_code.rl_update.rl_algs import rlalg_switch
-
+from os import walk
 
 def parse_args():
     parser = build_parser(auction=True)
@@ -23,12 +23,22 @@ def parse_args():
 
 class DecentralizedLoadLauncher(BaseLauncher):
     @classmethod
-    def load_primitive_weights(cls, organism, ckpt, pfunc):
-        pfunc('Before loading pre-trained weights')
-        organism.visualize_parameters(pfunc)
-        organism.load_state_dict(ckpt['organism'], ckpt['orgainsm_subsocieties_dict'])
-        pfunc('After loading pre-trained weights')
-        organism.visualize_parameters(pfunc)
+    def get_ckpts(cls, ckpt_path):
+        _, _, filenames = next(walk(ckpt_path))
+        filenames.remove('summary.csv')
+        ckpts = []
+        for filename in sorted(filenames, key=lambda x: int(x.split('batch')[1].split('.pth')[0])):
+            full_path = os.path.join(ckpt_path, filename)
+            ckpts.append(torch.load(full_path, map_location=torch.device('cpu')))
+        return ckpts
+
+    @classmethod
+    def load_primitive_weights(cls, organism, ckpts):
+        stats = []
+        for ckpt in ckpts:
+            a_stat, s_stat = organism.load_state_dict(ckpt['organism'], ckpt['orgainsm_subsocieties_dict'])
+            stats.append((a_stat, s_stat))
+        print(stats)
         return organism
 
     @classmethod
@@ -233,9 +243,9 @@ class DecentralizedLoadLauncher(BaseLauncher):
         logger = MultiBaseLogger(args=args)
         task_progression = cls.create_task_progression(logger, args)
         organism = cls.create_organism(device, task_progression, args)
-        ckpt_file = os.path.join("")
-        ckpts = [torch.load(ckpt_file, map_location=torch.device('cpu'))]
-        organism = cls.load_primitive_weights(organism, ckpts[0], logger.printf)
+        ckpt_path = os.path.join("/home/amit/arl/runs/coop_box_pushing/i0348432i____ccv_cln/seed0__2021-03-08_11-19-03/group_0/coop_box_pushing_0_test/checkpoints/")
+        ckpts = cls.get_ckpts(ckpt_path)
+        organism = cls.load_primitive_weights(organism, ckpts)
         # rl_alg = rlalg_switch(args.alg_name)(device=device, args=args)
         # experiment_builder = cls.experiment_switch(args.env_name[0])
         # experiment = experiment_builder(
