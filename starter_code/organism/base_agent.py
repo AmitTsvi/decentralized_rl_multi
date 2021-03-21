@@ -57,7 +57,7 @@ class BaseAgent(nn.Module):
             old_parameters = self.networks[name].parameters()
             self.networks[name].load_state_dict(agent_state_dict[name])
             for p1, p2 in zip(old_parameters, self.networks[name].parameters()):
-                changed += p1.data.ne(p2.data).sum()
+                changed += p1.data.ne(p2.data).sum().item()
         if not reset_optimizer:
             for name in self.optimizers:
                 self.optimizers[name].load_state_dict(

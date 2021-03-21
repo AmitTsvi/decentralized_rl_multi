@@ -85,7 +85,6 @@ class Society(nn.Module, Organism):
         agents_changed = []
         for agent, agent_state_dict in zip(self.agents, society_state_dict):
             agents_changed.append(agent.load_state_dict(agent_state_dict))
-        print(agents_changed)
         subsocieties_changed = []
         for s, s_state_dict in zip(self.subsocieties, society_subs_state_dict):
             subsocieties_changed.append(s.load_state_dict(s_state_dict))
