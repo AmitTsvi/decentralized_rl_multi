@@ -37,7 +37,7 @@ class DecentralizedLoadLauncher(BaseLauncher):
         stats = []
         for ckpt in ckpts:
             a_stat, s_stat = organism.load_state_dict(ckpt['organism'], ckpt['orgainsm_subsocieties_dict'])
-            stats.append((a_stat, s_stat))
+            stats.append((ckpt['epoch'], a_stat, s_stat))
         print(stats)
         return organism
 
