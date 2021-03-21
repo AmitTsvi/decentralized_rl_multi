@@ -54,7 +54,7 @@ class BaseAgent(nn.Module):
     def load_state_dict(self, agent_state_dict, reset_optimizer=True):
         changed = 0
         for name in self.networks:
-            old_parameters = self.networks[name].parameters()
+            old_parameters = copy.deepcopy(self.networks[name].parameters())
             self.networks[name].load_state_dict(agent_state_dict[name])
             for p1, p2 in zip(old_parameters, self.networks[name].parameters()):
                 changed += p1.data.ne(p2.data).sum().item()
