@@ -243,7 +243,7 @@ class DecentralizedLoadLauncher(BaseLauncher):
         logger = MultiBaseLogger(args=args)
         task_progression = cls.create_task_progression(logger, args)
         organism = cls.create_organism(device, task_progression, args)
-        ckpt_path = os.path.join("/home/amit/arl/results2/")
+        ckpt_path = os.path.join("/home/amit/arl/results/")
         ckpts = cls.get_ckpts(ckpt_path)
         organism = cls.load_primitive_weights(organism, ckpts)
         # rl_alg = rlalg_switch(args.alg_name)(device=device, args=args)
