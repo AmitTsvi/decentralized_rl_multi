@@ -2,6 +2,8 @@ import os
 import argparse
 import numpy as np
 import torch
+import matplotlib
+import matplotlib.pyplot as plt
 
 from launchers.monolithic import BaseLauncher
 from launchers.parsers import build_parser
@@ -23,6 +25,21 @@ def parse_args():
 
 class DecentralizedLoadLauncher(BaseLauncher):
     @classmethod
+    def plot_weight_change(cls, stats):
+        fig = plt.figure()
+        ax1 = fig.add_subplot(121)
+        ax1.stem([stat[0] for stat in stats], [stat[1] for stat in stats])
+        ax1.grid(True)
+        ax1.set_title('Agents Weight Change')
+
+        ax2 = fig.add_subplot(122)
+        ax2.stem([stat[0] for stat in stats], [stat[2] for stat in stats])
+        ax2.grid(True)
+        ax2.set_title('Players Weight Change')
+        plt.savefig(os.path.join("./", "weight_change"))
+        plt.close()
+
+    @classmethod
     def get_ckpts(cls, ckpt_path):
         _, _, filenames = next(walk(ckpt_path))
         filenames = filter(lambda x: "ckpt" in x, filenames)
@@ -38,7 +55,7 @@ class DecentralizedLoadLauncher(BaseLauncher):
         for ckpt in ckpts:
             a_stat, s_stat = organism.load_state_dict(ckpt['organism'], ckpt['orgainsm_subsocieties_dict'])
             stats.append((ckpt['epoch'], a_stat, s_stat))
-        print(stats)
+        cls.plot_weight_change(stats)
         return organism
 
     @classmethod
