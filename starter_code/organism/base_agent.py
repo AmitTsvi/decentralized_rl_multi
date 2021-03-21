@@ -57,7 +57,7 @@ class BaseAgent(nn.Module):
             old_model = copy.deepcopy(self.networks[name])
             self.networks[name].load_state_dict(agent_state_dict[name])
             for p1, p2 in zip(old_model.parameters(), self.networks[name].parameters()):
-                changed += torch.isclose(p1.data, p2.data, rtol=10**-3).sum().item()
+                changed += torch.isclose(p1.data, p2.data, rtol=10**-2).sum().item()
         if not reset_optimizer:
             for name in self.optimizers:
                 self.optimizers[name].load_state_dict(
