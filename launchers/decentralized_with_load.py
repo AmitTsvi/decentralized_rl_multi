@@ -25,7 +25,7 @@ class DecentralizedLoadLauncher(BaseLauncher):
     @classmethod
     def get_ckpts(cls, ckpt_path):
         _, _, filenames = next(walk(ckpt_path))
-        filenames.remove('summary.csv')
+        filenames = filter(lambda x: "ckpt" in x, filenames)
         ckpts = []
         for filename in sorted(filenames, key=lambda x: int(x.split('batch')[1].split('.pth')[0])):
             full_path = os.path.join(ckpt_path, filename)
