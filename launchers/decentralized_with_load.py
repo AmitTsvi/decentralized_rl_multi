@@ -243,7 +243,7 @@ class DecentralizedLoadLauncher(BaseLauncher):
         logger = MultiBaseLogger(args=args)
         task_progression = cls.create_task_progression(logger, args)
         organism = cls.create_organism(device, task_progression, args)
-        ckpt_path = os.path.join("/home/amit/arl/runs/coop_box_pushing/i0348432i____ccv_cln/seed0__2021-03-08_11-19-03/group_0/coop_box_pushing_0_test/checkpoints/")
+        ckpt_path = os.path.join("/home/amit/arl/results2/")
         ckpts = cls.get_ckpts(ckpt_path)
         organism = cls.load_primitive_weights(organism, ckpts)
         # rl_alg = rlalg_switch(args.alg_name)(device=device, args=args)
