@@ -64,5 +64,5 @@ Run `python launchers/decentralized_with_load.py --env-name coop_box_pushing --s
 You can view the training curves in `<exp_folder>/<seed_folder>/group_0/<env-name>_train/quantitative` and you can view visualizations (for environments that have image observations) in `<exp_folder>/<seed_folder>/group_0/<env-name>_test/qualitative`.
 
 ## Credits
-The learning alorithm is an expansion of [decentralized-rl](https://github.com/mbchang/decentralized-rl)
-The impelmenation of cooperative box pushing is a modified version of the one available from [open-spiel](https://github.com/deepmind/open_spiel)
+The learning alorithm is an expansion of [decentralized-rl](https://github.com/mbchang/decentralized-rl).
+The impelmenation of cooperative box pushing is a modified version of the one available from [open-spiel](https://github.com/deepmind/open_spiel).
