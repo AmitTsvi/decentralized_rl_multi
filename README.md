@@ -32,6 +32,7 @@ export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel
 export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel/build/python
 
 source venv/bin/activate
+cd decentralized_rl_multi/
 
 # Install dependencies:
 pip install -r ubuntu_requirements.txt
