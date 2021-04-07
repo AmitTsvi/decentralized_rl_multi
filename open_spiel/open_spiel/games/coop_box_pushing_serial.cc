@@ -52,7 +52,7 @@ enum ChanceOutcome {
 };
 
 // Rewards.
-constexpr double kBumpPenalty = -5;
+constexpr double kBumpPenalty = 0;
 constexpr double kDelayPenalty = -0.1;
 constexpr double kSmallBoxReward = 10;
 constexpr double kBigBoxReward = 100;
