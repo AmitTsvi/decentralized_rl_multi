@@ -32,6 +32,7 @@ export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel
 export PYTHONPATH=$PYTHONPATH:~/arl/open_spiel/build/python
 
 source venv/bin/activate
+cd decentralized_rl_multi/
 
 # Install dependencies:
 pip install -r ubuntu_requirements.txt
@@ -52,6 +53,7 @@ export OMP_NUM_THREADS=1
 # edit in starter_code\infrastructure\configs.py
 
 # Run game
+cd ..
 python launchers/decentralized.py --env-name coop_box_pushing --subroot coop_box_pushing --players 2 --printf
 ```
 
