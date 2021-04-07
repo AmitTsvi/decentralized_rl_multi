@@ -62,7 +62,7 @@ def float_mnist_dataset(mnist_orig):
     return mnist_float
 
 def get_mnist_datasets(root):
-    return shrink_mnist_dataset(float_mnist_dataset(load_mnist_datasets(root)))
+    return # return shrink_mnist_dataset(float_mnist_dataset(load_mnist_datasets(root)))
 
 
 if __name__ == '__main__':
