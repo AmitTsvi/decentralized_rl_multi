@@ -28,7 +28,7 @@ def ppo_config(args):
 def experiment_config(args):
     args.gpu_index = 0
 
-    args.max_epochs = int(1e2)
+    args.max_epochs = int(1e6)
     args.num_test = 10
     args.log_every = 10
     args.save_every = 50
