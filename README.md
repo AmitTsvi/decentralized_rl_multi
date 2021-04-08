@@ -60,7 +60,7 @@ python launchers/decentralized.py --env-name coop_box_pushing --subroot coop_box
 For GPU, set OMP_NUM_THREADS to 1: `export OMP_NUM_THREADS=1`.
 
 ## Training
-Run `python launchers/decentralized_with_load.py --env-name coop_box_pushing --subroot coop_box_pushing --players 2 --printf`. Add the `--for-real` flag to run those commands. You can enable parallel data collection with the `--parallel_collect` flag. You can also specify the gpu ids. As examples, in `runner.py`, the methods that launch `bandit`, `chain`, and `duality` do not use gpu while the others use gpu 0.
+Run `python launchers/decentralized_with_load.py --env-name coop_box_pushing --subroot coop_box_pushing --players 2 --printf`. You can enable parallel data collection with the `--parallel_collect` flag. You can also specify the gpu ids. As examples, in `runner.py`, the methods that launch `bandit`, `chain`, and `duality` do not use gpu while the others use gpu 0.
 
 ## Visualization
 You can view the training curves in `<exp_folder>/<seed_folder>/group_0/<env-name>_train/quantitative` and you can view visualizations (for environments that have image observations) in `<exp_folder>/<seed_folder>/group_0/<env-name>_test/qualitative`.
